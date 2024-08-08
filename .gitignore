@@ -1,0 +1,103 @@
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Dependency directories
+jspm_packages/
+
+# Typescript compiled files
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn v1
+.yarn-integrity
+
+# Yarn v2 and above
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# Typescript
+*.tsbuildinfo
+
+# React Native
+.expo/
+.expo-shared/
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.vscode-test/
+
+# Optional JetBrains IDEs
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Testing files
+coverage/
+jest-cache/
+jest-coverage/
+*.test_results/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Misc
+*.swp
+*~
+.npmrc
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore package-lock.json (if you have one) to avoid locking dependencies to specific versions
+# This can be uncommented if you prefer not to lock dependencies.
+# package-lock.json
+
+# Storybook
+*.storybook-out
+
+# Parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+dist/
