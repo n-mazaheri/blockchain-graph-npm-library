@@ -1,23 +1,25 @@
-import React from 'react';
-import { useTransactionData } from '../hooks/useTransactionData';
+import { useState, useEffect } from 'react';
+import { fetchEthereumTransactions, Transaction } from '../utils';
 
-type TransactionGraphProps = {
-  address: string;
-};
+export function useTransactionData(address: string, alchemyApiKey: string) {
+  const [data, setData] = useState<Transaction[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-const TransactionGraph: React.FC<TransactionGraphProps> = ({ address }) => {
-  const { data, loading, error } = useTransactionData(address);
+  const fetch = () => {
+    if (address) {
+      setLoading(true);
+      fetchEthereumTransactions(address, alchemyApiKey)
+        .then((transactions) => {
+          setData(transactions);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError(err.message);
+          setLoading(false);
+        });
+    }
+  };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading transactions</p>;
-
-  // Render the graph using your preferred library (e.g., D3.js, Chart.js, Visx)
-  return (
-    <div>
-      {/* Graph rendering logic goes here */}
-      <p>Graph for address: {address}</p>
-    </div>
-  );
-};
-
-export default TransactionGraph;
+  return { data, loading, error, fetch };
+}
