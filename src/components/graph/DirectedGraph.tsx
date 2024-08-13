@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ForceGraph2D from 'react-force-graph-2d';
-import Web3 from 'web3';
 import { Transaction } from '../../utils';
 
 interface DirectedGraphProps {
@@ -24,7 +23,6 @@ const DirectedGraph: React.FC<DirectedGraphProps> = ({
   }>({ nodes: [], links: [] });
 
   useEffect(() => {
-    const web3 = new Web3(Web3.givenProvider || 'https://eth-mainnet.g.alchemy.com/v2/' + alchemyApiKey);
     const filteredTransactions = transactions.filter((tx) => tx.token === token);
 
     const nodes = new Map<string, { id: string }>();

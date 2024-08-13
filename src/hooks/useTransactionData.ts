@@ -1,31 +1,25 @@
 import { useState, useEffect } from 'react';
-import { fetchTransactions, Transaction } from '../utils';
+import { fetchEthereumTransactions, Transaction } from '../utils';
 
-type UseTransactionData = {
-  data: Transaction[] | null;
-  loading: boolean;
-  error: Error | null;
-};
+export function useTransactionData(address: string, alchemyApiKey: string) {
+  const [data, setData] = useState<Transaction[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-export const useTransactionData = (address: string): UseTransactionData => {
-  const [data, setData] = useState<Transaction[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
+  const fetch = () => {
+    if (address) {
+      setLoading(true);
+      fetchEthereumTransactions(address, alchemyApiKey)
+        .then((transactions) => {
+          setData(transactions);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError(err.message);
+          setLoading(false);
+        });
+    }
+  };
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const transactions = await fetchTransactions(address);
-        setData(transactions);
-      } catch (err) {
-        setError(err as Error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadData();
-  }, [address]);
-
-  return { data, loading, error };
-};
+  return { data, loading, error, fetch };
+}

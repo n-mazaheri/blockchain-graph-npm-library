@@ -1,6 +1,6 @@
 {
   "name": "blockchain-graph-npm-library",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "a npm library for drawing graph of all transactions of any specific address in blockchain",
   "main": "index.js",
   "directories": {
@@ -45,6 +45,8 @@
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-force-graph-2d": "^1.25.5",
+    "recharts": "^2.12.7",
     "tslib": "^2.6.3"
   }
 }
