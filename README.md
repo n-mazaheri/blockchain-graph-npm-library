@@ -292,7 +292,7 @@ function App() {
 
       {data.length != 0 && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <DirectedGraph transactions={data} token="ETH" alchemyApiKey={alchemyApiKey} width={500} height={500} />
+          <DirectedGraph transactions={data} token="ETH" width={500} height={500} />
         </div>
       )}
 
