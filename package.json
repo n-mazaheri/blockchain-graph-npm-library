@@ -1,6 +1,6 @@
 {
   "name": "react-chain-tx-charts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React library for fetching and visualizing blockchain transaction data using various charts.",
   "main": "src/index.ts",
   "directories": {
