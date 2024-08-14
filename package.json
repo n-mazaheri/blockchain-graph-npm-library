@@ -1,6 +1,6 @@
 {
   "name": "react-chain-tx-charts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A React library for fetching and visualizing blockchain transaction data using various charts.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -46,10 +46,12 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "react-force-graph-2d": "^1.25.5",
     "recharts": "^2.12.7",
     "tslib": "^2.6.3"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }
