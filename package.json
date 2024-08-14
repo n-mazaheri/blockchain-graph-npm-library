@@ -1,7 +1,7 @@
 {
-  "name": "blockchain-graph-npm-library",
-  "version": "2.0.0",
-  "description": "a npm library for drawing graph of all transactions of any specific address in blockchain",
+  "name": "react-chain-tx-charts",
+  "version": "1.0.0",
+  "description": "A React library for fetching and visualizing blockchain transaction data using various charts.",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -15,12 +15,13 @@
     "url": "git+https://github.com/n-mazaheri/blockchain-graph-npm-library.git"
   },
   "keywords": [
+    "react",
     "blockchain",
-    "graph",
-    "transactions",
-    "npm",
-    "library"
+    "charts",
+    "transaction",
+    "visualization"
   ],
+  "readme": "./README.md",
   "author": "Nasrin Mazaheri",
   "license": "MIT",
   "bugs": {

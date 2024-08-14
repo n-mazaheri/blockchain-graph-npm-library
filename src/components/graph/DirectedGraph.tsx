@@ -5,18 +5,11 @@ import { Transaction } from '../../utils';
 interface DirectedGraphProps {
   transactions: Transaction[];
   token: string; // Token name filter
-  alchemyApiKey: string;
   width?: number; // Optional width of the chart
   height?: number; // Optional height of the chart
 }
 
-const DirectedGraph: React.FC<DirectedGraphProps> = ({
-  transactions,
-  token,
-  alchemyApiKey,
-  width = 800,
-  height = 600,
-}) => {
+const DirectedGraph: React.FC<DirectedGraphProps> = ({ transactions, token, width = 800, height = 600 }) => {
   const [graphData, setGraphData] = useState<{
     nodes: { id: string }[];
     links: { source: string; target: string; value: number }[];

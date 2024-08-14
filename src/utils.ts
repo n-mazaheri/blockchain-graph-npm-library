@@ -61,7 +61,7 @@ const fetchTokenMetadata = async (contractAddress: string, alchemyApiKey: string
   }
 };
 
-interface FetchOptions {
+export interface FetchOptions {
   startTime?: string;
   endTime?: string;
   maxNumber?: number;
