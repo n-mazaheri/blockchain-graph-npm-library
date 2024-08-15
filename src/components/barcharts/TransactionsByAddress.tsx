@@ -16,7 +16,7 @@ const TransactionsByAddress: React.FC<TransactionsByAddressProps> = ({
   height = 600,
 }) => {
   const data = transactions.reduce((acc, tx) => {
-    const address = tx.to === inputAddress ? tx.from : tx.to;
+    const address = tx.to?.toLocaleLowerCase() === inputAddress?.toLocaleLowerCase() ? tx.from : tx.to;
     const existing = acc.find((item) => item.address === address);
     if (existing) {
       existing.count += 1;

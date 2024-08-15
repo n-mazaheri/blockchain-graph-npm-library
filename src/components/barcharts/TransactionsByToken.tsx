@@ -18,7 +18,7 @@ const normalizeTokenName = (tokenName: string) => {
 const TransactionsByToken: React.FC<TransactionsByTokenProps> = ({ transactions, width = 800, height = 600 }) => {
   const data = transactions.reduce((acc, tx) => {
     // Normalize the token name
-    const tokenName = normalizeTokenName(tx.token);
+    const tokenName = tx.token;
 
     const existing = acc.find((item) => item.token === tokenName);
     if (existing) {
