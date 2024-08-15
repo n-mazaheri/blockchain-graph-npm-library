@@ -29,8 +29,12 @@ interface Transfer {
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const fetchTokenMetadata = async (contractAddress: string, alchemyApiKey: string): Promise<TokenMetadata | null> => {
-  const url = `https://eth-mainnet.g.alchemy.com/v2/${alchemyApiKey}`;
+const fetchTokenMetadata = async (
+  contractAddress: string,
+  alchemyApiKey: string,
+  network: string
+): Promise<TokenMetadata | null> => {
+  const url = `https://${network}.g.alchemy.com/v2/${alchemyApiKey}`;
 
   const data = {
     jsonrpc: '2.0',
@@ -86,14 +90,15 @@ const isFungible = (tx: Transfer): boolean => {
   );
 };
 
-export const fetchEthereumTransactions = async (
+export const fetchTransactions = async (
   address: string,
   alchemyApiKey: string,
+  network: 'eth-mainnet' | 'bsc-mainnet' | 'polygon-mainnet' = 'eth-mainnet', // Add the network parameter
   options: FetchOptions = {}
 ): Promise<Transaction[]> => {
   const { startTime, endTime, maxNumber, tokenAddresses, transactionType, direction, counterpartyAddress, tokenType } =
     options;
-  const url = `https://eth-mainnet.g.alchemy.com/v2/${alchemyApiKey}`;
+  const url = `https://${network}.g.alchemy.com/v2/${alchemyApiKey}`;
 
   const maxCountHex = maxNumber ? `0x${maxNumber.toString(16)}` : undefined;
 
@@ -182,10 +187,10 @@ export const fetchEthereumTransactions = async (
 
     const formattedTransfers: Transaction[] = await Promise.all(
       transfers.map(async (tx) => {
-        let tokenName = 'ETH';
+        let tokenName = network === 'eth-mainnet' ? 'ETH' : network === 'bsc-mainnet' ? 'BNB' : 'MATIC';
 
         if (tx.category !== 'external') {
-          const metadata = await fetchTokenMetadata(tx.rawContract.address, alchemyApiKey);
+          const metadata = await fetchTokenMetadata(tx.rawContract.address, alchemyApiKey, network);
           tokenName = metadata ? metadata.name : 'Unknown Token';
         }
 

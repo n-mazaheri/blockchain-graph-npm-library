@@ -24,7 +24,7 @@ yarn add react-chain-tx-charts
 
 ### `useTransactionData` Hook
 
-The `useTransactionData` hook is a powerful utility for fetching Ethereum transactions associated with a given address. It uses the Alchemy API to retrieve transaction data and allows filtering through various options such as date range, token types, transaction categories, and more.
+The `useTransactionData` hook is a powerful utility for fetching Ethereum transactions associated with a given address. It uses the Alchemy API to retrieve transaction data and allows filtering through various options such as date range, token types, transaction categories, and more. It supports **_ ETH _**, **_ BSC _** and **_ Polygon _** networks.
 
 #### Hook Signature
 
@@ -39,16 +39,16 @@ function useTransactionData(alchemyApiKey: string): {
 
 #### Parameters
 
-`alchemyApiKey`: Your Alchemy API key to access Ethereum data.
-`options`: An object that allows you to filter the transactions based on various criteria (explained below).
-`address`: The Ethereum address for which you want to fetch the transactions.
+- `address`: The Ethereum address for which you want to fetch the transactions.
+- `network`: The netowrk you want to retrieve its transactions from `eth-mainnet`, `bsc-mainnet`, `polygon-mainnet` (optional, default `eth-mainnet`)
+- `options`: An object that allows you to filter the transactions based on various criteria (explained below). (optional, default `{}` )
 
 #### Return Values
 
-`data`: An array of transactions that match the given address and filters.
-`loading`: A boolean indicating whether the data is currently being fetched.
-`error`: A string containing an error message if the fetch fails, or null if there's no error.
-`fetch`: A function to trigger the data fetch with the provided options and address.
+- `data`: An array of transactions that match the given address and filters.
+- `loading`: A boolean indicating whether the data is currently being fetched.
+- `error`: A string containing an error message if the fetch fails, or null if there's no error.
+- `fetch`: A function to trigger the data fetch with the provided options and address.
 
 #### Fetch Options
 

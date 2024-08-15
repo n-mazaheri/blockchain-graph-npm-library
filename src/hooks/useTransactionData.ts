@@ -1,19 +1,23 @@
 import { useState } from 'react';
-import { fetchEthereumTransactions, FetchOptions, Transaction } from '../utils';
+import { fetchTransactions, FetchOptions, Transaction } from '../utils';
 
 export function useTransactionData(alchemyApiKey: string) {
   const [data, setData] = useState<Transaction[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetch = (options: FetchOptions, address: string) => {
+  const fetch = (
+    address: string,
+    network: 'eth-mainnet' | 'bsc-mainnet' | 'polygon-mainnet' = 'eth-mainnet', // Add the network parameter
+    options: FetchOptions = {}
+  ) => {
     // Clear previous data and error
     setData([]);
     setError(null);
 
     if (address) {
       setLoading(true);
-      fetchEthereumTransactions(address, alchemyApiKey, options)
+      fetchTransactions(address, alchemyApiKey, network, options)
         .then((transactions) => {
           setData(transactions);
           setLoading(false);
