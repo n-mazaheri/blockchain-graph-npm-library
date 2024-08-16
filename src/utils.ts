@@ -93,7 +93,16 @@ const isFungible = (tx: Transfer): boolean => {
 export const fetchTransactions = async (
   address: string,
   alchemyApiKey: string,
-  network: 'eth-mainnet' | 'bsc-mainnet' | 'polygon-mainnet' = 'eth-mainnet', // Add the network parameter
+  network:
+    | 'eth-mainnet'
+    | 'eth-goerli'
+    | 'polygon-mainnet'
+    | 'polygon-mumbai'
+    | 'arbitrum-mainnet'
+    | 'optimism-mainnet'
+    | 'bsc-mainnet'
+    | 'avax-mainnet'
+    | 'base-mainnet' = 'eth-mainnet', // Add more networks here
   options: FetchOptions = {}
 ): Promise<Transaction[]> => {
   const { startTime, endTime, maxNumber, tokenAddresses, transactionType, direction, counterpartyAddress, tokenType } =
@@ -187,9 +196,26 @@ export const fetchTransactions = async (
 
     const formattedTransfers: Transaction[] = await Promise.all(
       transfers.map(async (tx) => {
-        let tokenName = network === 'eth-mainnet' ? 'ETH' : network === 'bsc-mainnet' ? 'BNB' : 'MATIC';
+        let tokenName = 'Unknown Token';
 
-        if (tx.category !== 'external') {
+        // Determine the token name based on the network
+        if (tx.category === 'external') {
+          tokenName = network.includes('eth')
+            ? 'ETH'
+            : network.includes('polygon')
+            ? 'MATIC'
+            : network.includes('bsc')
+            ? 'BNB'
+            : network.includes('avax')
+            ? 'AVAX'
+            : network.includes('arbitrum')
+            ? 'ARB'
+            : network.includes('optimism')
+            ? 'OP'
+            : network.includes('base')
+            ? 'ETH'
+            : 'Unknown Token';
+        } else {
           const metadata = await fetchTokenMetadata(tx.rawContract.address, alchemyApiKey, network);
           tokenName = metadata ? metadata.name : 'Unknown Token';
         }
