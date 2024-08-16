@@ -29,11 +29,19 @@ interface Transfer {
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// Cache object to store token metadata
+const tokenMetadataCache: { [address: string]: TokenMetadata | null } = {};
+
 const fetchTokenMetadata = async (
   contractAddress: string,
   alchemyApiKey: string,
   network: string
 ): Promise<TokenMetadata | null> => {
+  // Check if the metadata is already in the cache
+  if (tokenMetadataCache[contractAddress]) {
+    return tokenMetadataCache[contractAddress];
+  }
+
   const url = `https://${network}.g.alchemy.com/v2/${alchemyApiKey}`;
 
   const data = {
@@ -58,9 +66,13 @@ const fetchTokenMetadata = async (
       throw new Error(result.error.message);
     }
 
-    return result.result as TokenMetadata;
+    // Store the fetched metadata in the cache
+    const metadata = result.result as TokenMetadata;
+    tokenMetadataCache[contractAddress] = metadata;
+    return metadata;
   } catch (error) {
     console.error('Error fetching token metadata:', error);
+    tokenMetadataCache[contractAddress] = null;
     return null;
   }
 };
@@ -102,7 +114,7 @@ export const fetchTransactions = async (
     | 'optimism-mainnet'
     | 'bsc-mainnet'
     | 'avax-mainnet'
-    | 'base-mainnet' = 'eth-mainnet', // Add more networks here
+    | 'base-mainnet' = 'eth-mainnet',
   options: FetchOptions = {}
 ): Promise<Transaction[]> => {
   const { startTime, endTime, maxNumber, tokenAddresses, transactionType, direction, counterpartyAddress, tokenType } =

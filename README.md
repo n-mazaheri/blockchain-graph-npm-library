@@ -2,7 +2,7 @@
 
 ## Introduction
 
-`react-chain-tx-charts` is a versatile React library designed for visualizing blockchain transaction data. By leveraging Alchemy's API, this library provides a simple way to fetch and display blockchain transaction details using a variety of chart types, such as bar charts, directed graphs, and more. It's an ideal tool for developers looking to integrate blockchain data visualization into their React applications.
+`react-chain-tx-charts` is a versatile React library designed for visualizing blockchain transaction data. By leveraging Alchemy's API, this library provides a simple way to fetch and display blockchain transaction details using a variety of chart types, such as bar charts, directed graphs, and more. It's an ideal tool for developers looking to integrate blockchain data visualization into their React applications. It supports **ETH**, **BSC**, **Polygon**, **Arbitrum**, **Optimism**, **Avax** and **Base** networks.
 
 ## Installation
 
@@ -24,7 +24,7 @@ yarn add react-chain-tx-charts
 
 ### `useTransactionData` Hook
 
-The `useTransactionData` hook is a powerful utility for fetching Ethereum transactions associated with a given address. It uses the Alchemy API to retrieve transaction data and allows filtering through various options such as date range, token types, transaction categories, and more. It supports **_ ETH _**, **_ BSC _** and **_ Polygon _** networks.
+The `useTransactionData` hook is a powerful utility for fetching Ethereum transactions associated with a given address. It uses the Alchemy API to retrieve transaction data and allows filtering through various options such as date range, token types, transaction categories, and more.
 
 #### Hook Signature
 
